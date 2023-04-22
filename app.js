@@ -4,19 +4,19 @@
 
 // Function that accepts a string value as an argument and returns a random index number from that string
 
-function randomIndex(str){
-    return Math.floor(Math.random()* str.length)
+function randomIndex(str) {
+    return Math.floor(Math.random() * str.length)
 };
 // Check to see if it is functioning properly
-console.log(randomIndex(`Chicken`)); // 0 thru 6
+// console.log(randomIndex(`Chicken`)); // 0 thru 6
 
-// Function that returns a random lowercase letter ysing the randomindex in the letters `string`
-function getRandomLower(){
+// Function that returns a random lowercase letter using the randomindex in the letters `string`
+function getRandomLower() {
     const letters = `abcdefghijklmnopqrstuvwxyz`;
     // Returns a random letter using a random index from the randomIndex function on the letters string
     return letters[randomIndex(letters)]
 };
-console.log(getRandomLower()); // random lowercase letter
+   console.log(getRandomLower()); // random lowercase letter
 
 // Function tha returns an uppercase letter
 function getRandomUpper() {
@@ -29,16 +29,16 @@ console.log(getRandomUpper());
 
 // Function that returns a random number (as a string value)
 
-function getRandomNumber(){
+function getRandomNumber() {
     const numbers = `1234567890`;
     // Return a random number using the random index from the numbers string
     return numbers[randomIndex(numbers)]
 };
 
-console.log(getRandomNumber());
+console.log(getRandomNumber()); // This is still a string
 
-
-function getRandomSymbol(){
+// Function that returns a random symbol
+function getRandomSymbol() {
     const symbols = '!@#$%^&*(){}[]=<>/,.';
 
     return symbols[randomIndex(symbols)]
@@ -49,7 +49,7 @@ console.log(getRandomSymbol());
 // Object to store all the character generator funcitons
 const randomFunctions = {
     lower: getRandomLower,
-    upper: getRandomLower,
+    upper: getRandomUpper,
     number: getRandomNumber,
     symbol: getRandomSymbol,
 };
@@ -65,7 +65,6 @@ const symbolsEl = document.querySelector('#symbols');
 const lengthEl = document.querySelector('#length');
 const generateEl = document.querySelector('#generate');
 
-
 // Generate password function (Function that accepts true or false values as well as a number as an argument)
 // NOTE: the checkbox inputs and number (length) input will determine the value/arguments entered into this function
 function generatePassword(lower, upper, number, symbol, length) {
@@ -76,12 +75,11 @@ function generatePassword(lower, upper, number, symbol, length) {
     // 2. Filter out the unchecked options
     // True and False values can be added together (True is equal to 1 and False is equal to 0)
     // Note: the values set to the typeCounts variable will be used when building out the password
-
     const typesCount = lower + upper + number + symbol;
-    console.log(typesCount);
+    console.log('typesCount', typesCount);
 
     // If the user has not selected any of the four options then the alert will be displayed and an empty string will be returned from the function so the password displays to the user as an empty string
-    if (typesCount === 0){
+    if (typesCount === 0) {
         alert(`Please select at least one option`)
         return ``;
     }
@@ -97,34 +95,32 @@ function generatePassword(lower, upper, number, symbol, length) {
     console.log(typesArr);
 
     // The filter method creates a new array with all the items that pass the test implemented by the provided function (aka all the items that cause the function to return a boolean value of true when the function is run using the item as the argument for the item parameter)
-    // Checking if the value for index of 1 in each item in the typesArr array is true or fals. Also removing the item from the typesArr array if it is false
+    // Checking if the value for index of 1 in each item in the typesArr array is true or false. Also removing the item from the typesArr array if it is false
 
     typesArr = typesArr.filter((item) => {
         console.log(item[1]);
         return item[1];
 
     });
-    console.log(typesArr);
+    console.log('typesArr', typesArr);
 
     // 3. Loop over the length and call the generator function for each checked option
     // Note: the value for length is the value entered for the length number input
 
-    for (i=0;i < length; i+=typesCount) {
+    for (i = 0; i < length; i += typesCount) {
 
         typesArr.forEach((type) => {
             const funcName = type[0];
-            console.log(funcName);
+            console.log('funcname', funcName);
             // Accessing and running the function in the randomFunctions object. Also, concatenating the value returns from the accessed function to the generatedPassword string
             generatedPassword += randomFunctions[funcName]();
-            console.log(generatedPassword);
+            console.log('generated password', generatedPassword);
         });
-
-
     }
 
     // 4. Add generated password to the final password variable and return it from the function
-    const finalPassword = generatedPassword.slice(0, length)
-    console.log(finalPassword);
+    const finalPassword = generatedPassword.slice(0, length);
+    console.log('final password', finalPassword);
 
     return finalPassword;
 
@@ -133,7 +129,7 @@ function generatePassword(lower, upper, number, symbol, length) {
 // Event Listener for when the 'generate password' button is clicked.
 generateEl.addEventListener(`click`, () => {
 
-    // Checking if the following options are checked and the true false values tot the respective variables
+    // Checking if the following options are checked and set the true/false values to the respective variables
 
     const hasLower = lowercaseEl.checked;
     const hasUpper = uppercaseEl.checked;
@@ -153,17 +149,14 @@ clipboardEl.addEventListener(`click`, () => {
     // Access the password result
     const password = resultEl.innerText;
 
-    if(password === '') {
+    // if the user clicks the clipboard button while no password is displayed then an alert will be displayed to the user
+    if (password === '') {
         alert('Please generate a password first');
         return
-    }
+    };
 
     // Referencing the 'navigator' object to copy the selected value to the clipboard on the device the webpage is being viewed on
 
     navigator.clipboard.writeText(password);
     alert('Copied to clipboard');
 });
-
-
-
-

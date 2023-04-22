@@ -1,8 +1,8 @@
- /* font-family: 'Open Sans', sans-serif; */ 
+ /* font-family: 'Open Sans', sans-serif; */
 
- /* star selector selects everything in HTML file */
+ /* star selector selects every element in HTML file */
  * {
-    /* includes the padding and border when setting the width or height for an element */
+    /* includes the padding and border when setting the width or height for an element  often set at start of all projects*/
     box-sizing: border-box;
  }
 
@@ -19,14 +19,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-/* Setting the height to 100vh so the div will be centered vertically in the browser window */
+    /* Setting the height to 100vh so the div will be centered vertically in the browser window */
     height: 100vh;
     /* Padding so it is not right up against the edge of the browser window */
     padding: 25px;
  }
 
  h2 {
-    /* TopRight /Left Bottom */
+    /* Top Right /Left Bottom */
     margin: 10px 0 20px;
     text-align: center;
     text-transform: uppercase;
@@ -50,7 +50,7 @@
  }
 
  #container {
-    background-color: #639;
+    background-color: #419;
     padding: 15px;
     width: 350px;
     border-radius: 15px;
@@ -62,14 +62,15 @@
     font-size: 18px;
     letter-spacing: 1px;
     padding: 10px 5px 10px 10px;
-    /* Used to position the span and button elements */
+    /* The flex here is used to position the span and button elements */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 15px;
  }
 
  #clipboard {
-    font-size: 20px;
+    font-size: 25px;
     border-radius: 30px;
 
  }
@@ -80,16 +81,3 @@
     text-transform: uppercase;
     border-radius: 30px;
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
